@@ -16,6 +16,6 @@ setup(
     url="",
     packages=find_packages(),
     python_requires=">3.6",
-    install_requires=["fastapi", "uvicorn", "starlette_exporter"],
+    install_requires=["fastapi", "uvicorn[standard]", "gunicorn", "starlette_exporter"],
     long_description=read("README.md"),
 )
