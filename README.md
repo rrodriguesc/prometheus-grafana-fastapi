@@ -17,3 +17,5 @@ Then simply start the services
 ```bash
 docker-compose -d up
 ```
+
+A simple dashboard for api is available [here](./grafana/api-dashboard.json) and you can import it to use. For cAdvisor a suggested dashboard is https://grafana.com/grafana/dashboards/14282
