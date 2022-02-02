@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 from starlette.responses import RedirectResponse
+from starlette_exporter import PrometheusMiddleware, handle_metrics
 
 from app.v1.routes import test as test_v1
 
@@ -42,8 +43,15 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 app.add_middleware(GZipMiddleware, minimum_size=1024 * 1000)
+app.add_middleware(
+    PrometheusMiddleware,
+    app_name="api",
+    filter_unhandled_paths=True,
+    skip_paths=["/api/openapi.json", "/api/docs", "/metrics"],
+)
+
+app.add_route("/metrics", handle_metrics)
 
 
 @app.get("/api")
